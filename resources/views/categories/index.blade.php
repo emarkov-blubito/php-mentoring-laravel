@@ -21,7 +21,7 @@
                                 <div class="col-md-3">{{$category->url}}</div>
                                 <div class="col-md-3">{{$category->description}}</div>
                                 <div class="col-md-3">
-                                    <a href="/categories/{{$category->id}}/edit">Edit</a>
+                                    <a href="{{ action('CategoryController@edit', ['category' => $category]) }}">Edit</a>
                                     <form method="POST" action="{{ action('CategoryController@destroy', ['category' => $category]) }}">
                                         @method('DELETE')
                                         @csrf

@@ -77,7 +77,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
+        return redirect()->action('CategoryController@edit', ['category' => $category])
+        ->with(['message' => 'Successfully updated']);
     }
 
     /**
@@ -88,6 +90,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
     }
 }
