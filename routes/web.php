@@ -14,3 +14,7 @@
 Route::get('/', 'PagesController@homepage');
 Route::get('/load-products/{offset}', 'PagesController@loadProducts');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
