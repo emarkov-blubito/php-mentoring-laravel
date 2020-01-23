@@ -61,10 +61,42 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .loader {
+                position: fixed;
+                left: 50%;
+                top: 40%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite; /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+                0% { -webkit-transform: rotate(0deg); }
+                100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            .hide{
+                display: none;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     </head>
     <body>
+        <div class="loader" style="display: none;">
+        </div>
         <div class="test">
             @foreach($products as $product)
                 <p class="el">{{$product->name}}</p><br><br>
@@ -75,6 +107,12 @@
 
             var chk = true;
 
+            $(document).ajaxStart(function() {
+                $(".loader").show();
+            }).ajaxStop(function() {
+                $(".loader").hide();
+            });
+
             $(window).scroll(function() {
                 if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
                     if(chk) {
@@ -84,7 +122,10 @@
                             type: "GET",
                             url: "/load-products/" + offset,
                             success: function(resp){
-                                console.log(resp);
+                                var products = JSON.parse(resp.products);
+                                for(i=0; i<products.length; i++){
+                                    $('.test').append('<p class="el">'+products[i].name+'</p><br><br>');
+                                }
                                 chk = true;
                             }
                         });
