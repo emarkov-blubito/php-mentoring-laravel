@@ -91,10 +91,19 @@
             .hide{
                 display: none;
             }
+
+            .top-menu{width:100%;height:50px;}
+            .top-menu ul{list-style-type:none;}
+            .top-menu ul li{display:inline-block;}
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     </head>
     <body>
+        <div class="top-menu">
+            <ul>
+                <li><a href="/categories">Category</a></li>
+            </ul>
+        </div>
         <div class="loader" style="display: none;">
         </div>
         <div class="test">

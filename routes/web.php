@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', 'PagesController@homepage');
-Route::get('/load-products/{offset}', 'PagesController@loadProducts');
+// Route::get('/', 'PagesController@homepage');
+// Route::get('/load-products/{offset}', 'PagesController@loadProducts');
 
 
 Auth::routes();
+
+Route::get('/', 'PagesController@homepage');
+Route::get('/load-products/{offset}', 'PagesController@loadProducts');
+
+Route::resource('categories', 'CategoryController');
 
 Route::get('/home', 'HomeController@index')->name('home');
