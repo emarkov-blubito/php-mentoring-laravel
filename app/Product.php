@@ -9,4 +9,14 @@ class Product extends Model
     protected $fillable = [
         'name', 'url', 'description', 'brand_id', 'category_id'
     ];
+
+    public function category()
+    {
+    	$this->belongsTo('App\Category');
+    }
+
+    public function brand()
+    {
+    	$this->belongsTo('App\Brand');
+    }
 }

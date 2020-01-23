@@ -8,6 +8,16 @@
                 <div class="card-header">Category listing</div>
 
                 <div class="card-body">
+                    @if(Session::has('message'))
+                        <div class="alert-success">{{ Session::get('message') }}</div>
+                    @endif
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <a href="{{ action('CategoryController@create') }}" class="btn btn-primary">
+                                Create
+                            </a>
+                        </div>
+                    </div>
                     @if($categories)
                         <div class="row">
                             <div class="col-md-3">Name</div>
