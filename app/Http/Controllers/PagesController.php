@@ -14,7 +14,7 @@ class PagesController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function homepage()
     {
 
