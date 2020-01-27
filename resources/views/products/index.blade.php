@@ -55,19 +55,26 @@
 @section('js')
     <script>
         $(document).ready(function(){
-            var productsFilter = $('.filter-products');
+            var productsFilter = $('.filter-products').find('.form-control');
 
-            productsFilter.on('change', function (event) {
+            productsFilter.on('change keypress', function () {
+                setTimeout(function () {
+                    filter($('.filter-products'));
+                }, 3000);
+            });
+            productsFilter.on('submit', function (event) {
                 event.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    data: productsFilter.serialize(),
-                    url: productsFilter.attr('action'),
-                    success: function(response){
-                        $('.product-table').html(response.products);
-                    }
-                });
             });
         });
+        var filter = function (filterElement) {
+            $.ajax({
+                type: "POST",
+                data: filterElement.serialize(),
+                url: filterElement.attr('action'),
+                success: function(response){
+                    $('.product-table').html(response.products);
+                }
+            });
+        }
     </script>
 @endsection

@@ -11,7 +11,7 @@ class ProductRepository implements ProductRepositoryInterface
 {
     public function all()
     {
-        return Product::all();
+        return Product::limit(50)->get();
     }
 
     public function getByBrand(Brand $brand)
