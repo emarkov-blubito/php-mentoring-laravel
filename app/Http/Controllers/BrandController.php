@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Product;
+use App\Brand;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
-        return view('categories/index', ['categories' => $categories]);
+        $brands = Brand::get();
+        return view('brands/index', ['brands' => $brands]);
     }
 
     /**
@@ -32,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories/create');
+        return view('brands/create');
     }
 
     /**
@@ -43,19 +36,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
+        $brand = Brand::create($request->all());
 
-        return redirect()->action('CategoryController@edit', ['category' => $category])
+        return redirect()->action('BrandController@edit', ['brand' => $brand])
         ->with(['message' => 'Successfully created']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Brand $brand)
     {
         //
     }
@@ -63,40 +56,38 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Brand $brand)
     {
-        return view('categories/edit', ['category' => $category]);
-
+        return view('brands/edit', ['brand' => $brand]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Brand $brand)
     {
-        $category->update($request->all());
-        return redirect()->action('CategoryController@edit', ['category' => $category])
+        $brand->update($request->all());
+        return redirect()->action('BrandController@edit', ['brand' => $brand])
         ->with(['message' => 'Successfully updated']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Brand $brand)
     {
-        Product::where('category_id', $category->id)->delete();
-        $category->delete();
-        return redirect()->action('CategoryController@index')
+        $brand->delete();
+        return redirect()->action('BrandController@index')
         ->with(['message' => 'Successfully deleted']);
     }
 }

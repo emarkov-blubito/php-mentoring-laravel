@@ -21,5 +21,7 @@ Route::get('/', 'PagesController@homepage');
 Route::get('/load-products/{offset}', 'PagesController@loadProducts');
 
 Route::resource('categories', 'CategoryController');
+Route::resource('brands', 'BrandController');
+Route::resource('products', 'ProductController');
 
 Route::get('/home', 'HomeController@index')->name('home');
