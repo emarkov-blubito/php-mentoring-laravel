@@ -9,4 +9,5 @@ interface ProductRepositoryInterface
     public function all();
     public function getByCategory(Category $category);
     public function getByBrand(Brand $brand);
+    public function getByName($name);
 }
