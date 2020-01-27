@@ -26,8 +26,8 @@ class ProductUpdateRequest extends FormRequest
         return [
             'category_id' => 'required',
             'brand_id' => 'required',
-            'name' => 'required|unique:products',
-            'url' => 'required|unique:products',
+            'name' => 'required|unique:products,name,' . $this->product->id,
+            'url' => 'required|unique:products,url,' . $this->product->id,
             'description' => 'required'
         ];
     }
