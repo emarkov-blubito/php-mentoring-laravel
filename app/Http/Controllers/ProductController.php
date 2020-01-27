@@ -7,9 +7,18 @@ use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use App\Category;
 use App\Brand;
+use App\Repositories\ProductRepository;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +26,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = $this->productRepository->all();
         $categories = Category::all();
         $brands = Brand::all();
-        return view('products/index', ['products' => $products, 'categories'=>$categories, 'brands'=>$brands]);
+        return view('products/index', [
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands
+        ]);
     }
 
     /**
@@ -87,16 +100,26 @@ class ProductController extends Controller
         ->with(['message' => 'Successfully updated']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Product $product)
     {
         $product->delete();
         return redirect()->action('ProductController@index')
         ->with(['message' => 'Successfully deleted']);
+    }
+
+    public function filter(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->category_id) {
+                $products = $this->productRepository->getByCategory($request->category_id);
+            }
+            $html = view('products/table', [
+                'products' => $products,
+                'categories' => Category::all(),
+                'brands' => Brand::all()
+            ])->render();
+            return response()->json(['products' => $html], 200);
+        }
     }
 }

@@ -11,51 +11,62 @@
                     @if(Session::has('message'))
                         <div class="alert-success">{{ Session::get('message') }}</div>
                     @endif
-                    <div class="form-group row">
-                        <div class="col-md-8">
-                            <a href="{{ action('ProductController@create') }}" class="btn btn-primary">
-                                Create
-                            </a>
-                        </div>
-                    </div>
-                    @if($products)
-                        <div class="row">
-                            <div class="col-md-2">Category</div>
-                            <div class="col-md-2">Brand</div>
-                            <div class="col-md-2">Name</div>
-                            <div class="col-md-2">Url</div>
-                            <div class="col-md-2">Description</div>
-                            <div class="col-md-2">Operations</div>
-                        </div>
-                        @foreach($products as $product)
-                            <div class="row">
-                                <div class="col-md-2">
-                                    @foreach($categories as $category)
-                                        {{($category->id == $product->category_id) ? $category->name : ""}}
-                                    @endforeach
-                                </div>
-                                <div class="col-md-2">
+                    <form method="POST" action="/products/filter" class="filter-products">
+                        @csrf
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <select name="brand_id" class="form-control">
+                                    <option value="">Select Brand</option>
                                     @foreach($brands as $brand)
-                                        {{($brand->id == $product->brand_id) ? $brand->name : ""}}
+                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
                                     @endforeach
-                                </div>
-                                <div class="col-md-2">{{$product->name}}</div>
-                                <div class="col-md-2">{{$product->url}}</div>
-                                <div class="col-md-2">{{$product->description}}</div>
-                                <div class="col-md-2">
-                                    <a href="{{ action('ProductController@edit', ['product' => $product]) }}">Edit</a>
-                                    <form method="POST" action="{{ action('ProductController@destroy', ['product' => $product]) }}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                </div>
+                                </select>
                             </div>
-                        @endforeach
-                    @endif
+                            <div class="col-4">
+                                <select name="category_id" class="form-control">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <input type="search" placeholder="Search..." name="name" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8">
+                                <a href="{{ action('ProductController@create') }}" class="btn btn-primary">
+                                    Create
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="product-table">
+                        @include('products/table');
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+            var productsFilter = $('.filter-products');
+
+            productsFilter.on('change', function () {
+                $.ajax({
+                    type: "POST",
+                    data: productsFilter.serialize(),
+                    url: productsFilter.attr('action'),
+                    success: function(response){
+                        $('.product-table').html(response.products);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
