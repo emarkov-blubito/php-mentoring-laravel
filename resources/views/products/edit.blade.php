@@ -38,15 +38,18 @@
                                 <input type="text" class="form-control"
                                    name="name" value="{{$product->name}}" required autocomplete="name" autofocus>
                             </div>
+                            @error('name') <div class="alert-danger">{{$message}}</div> @enderror
                             <div class="form-group row">
                                 <label>Url</label>
                                 <input type="text" class="form-control"
                                    name="url" value="{{$product->url}}" required>
                             </div>
+                            @error('url') <div class="alert-danger">{{$message}}</div> @enderror
                             <div class="form-group row">
                                 <label>Description</label><br>
                                 <textarea name="description" style="width:100%;height:100px;">{{$product->description}}</textarea>
                             </div>
+                            @error('description') <div class="alert-danger">{{$message}}</div> @enderror
                             <div class="form-group row">
                                 <div class="col-md-8">
                                     <button type="submit" class="btn btn-primary">
