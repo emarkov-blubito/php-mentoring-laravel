@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use App\Category;
 use App\Brand;
@@ -37,15 +39,11 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProductStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $data = $request->validate([
-            'category_id'=>'required|not_in:0',
-            'brand_id'=>'required|not_in:0'
-        ]);
         $product = Product::create($request->all());
 
         return redirect()->action('ProductController@edit', ['product' => $product])
@@ -79,16 +77,12 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ProductUpdateRequest $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        $data = $request->validate([
-            'category_id'=>'required|not_in:0',
-            'brand_id'=>'required|not_in:0'
-        ]);
         $product->update($request->all());
         return redirect()->action('ProductController@edit', ['product' => $product])
         ->with(['message' => 'Successfully updated']);
