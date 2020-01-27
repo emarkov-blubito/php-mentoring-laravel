@@ -57,7 +57,8 @@
         $(document).ready(function(){
             var productsFilter = $('.filter-products');
 
-            productsFilter.on('change', function () {
+            productsFilter.on('change', function (event) {
+                event.preventDefault();
                 $.ajax({
                     type: "POST",
                     data: productsFilter.serialize(),

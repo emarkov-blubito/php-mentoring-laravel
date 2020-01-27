@@ -111,9 +111,7 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         if ($request->ajax()) {
-            if ($request->category_id) {
-                $products = $this->productRepository->getByCategory($request->category_id);
-            }
+            $products = $this->productRepository->search($request);
             $html = view('products/table', [
                 'products' => $products,
                 'categories' => Category::all(),
