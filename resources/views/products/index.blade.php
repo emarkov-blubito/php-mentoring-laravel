@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <div class="loader" style="display: none;"></div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -57,6 +58,12 @@
         $(document).ready(function(){
             
             filter($('.filter-products'));
+
+            $(document).ajaxStart(function() {
+                $(".loader").show();
+            }).ajaxStop(function() {
+                $(".loader").hide();
+            });
 
             $(document).on('click', '.pagination .page-link',function(event)
             {
