@@ -43,7 +43,7 @@
                         </div>
                     </form>
                     <div class="product-table">
-                        @include('products/table');
+                        @include('products/table')
                     </div>
                 </div>
             </div>
@@ -55,6 +55,20 @@
 @section('js')
     <script>
         $(document).ready(function(){
+            
+            filter($('.filter-products'));
+
+            $(document).on('click', '.pagination .page-link',function(event)
+            {
+                event.preventDefault();
+    
+                $('.page-item').removeClass('active');
+                $(this).parent('.page-item').addClass('active');
+                var url = $(this).attr('href');
+                var page=$(this).attr('href').split('page=')[1];
+                filter($('.filter-products'), page);
+            });
+
             var productsFilter = $('.filter-products').find('.form-control');
 
             productsFilter.on('change keypress', function () {
@@ -66,11 +80,16 @@
                 event.preventDefault();
             });
         });
-        var filter = function (filterElement) {
+        var filter = function (filterElement, pageNumber) {
+            if(pageNumber)
+                var pageUrl = '?page=' + pageNumber
+            else 
+                var pageUrl = '';
+
             $.ajax({
                 type: "POST",
                 data: filterElement.serialize(),
-                url: filterElement.attr('action'),
+                url: filterElement.attr('action') + pageUrl ,
                 success: function(response){
                     $('.product-table').html(response.products);
                 }

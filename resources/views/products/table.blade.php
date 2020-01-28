@@ -32,4 +32,6 @@
             </div>
         </div>
     @endforeach
+
+    {{$products->links()}}
 @endif
