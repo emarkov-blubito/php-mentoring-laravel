@@ -33,5 +33,5 @@
         </div>
     @endforeach
 
-    {{$products->links()}}
+    {{$products->render()}}
 @endif
