@@ -78,12 +78,15 @@
 
             var productsFilter = $('.filter-products').find('.form-control');
 
-            productsFilter.on('change keypress', function () {
-                setTimeout(function () {
-                    filter($('.filter-products'));
-                }, 3000);
+            productsFilter.on('change, keyup', function (event) {
+                if(event.keyCode != 13){
+                    setTimeout(function () {
+                        filter($('.filter-products'));
+                    }, 3000);
+                }
+
             });
-            productsFilter.on('submit', function (event) {
+            $('.filter-products').on('submit', function (event) {
                 event.preventDefault();
             });
         });
