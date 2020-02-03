@@ -78,7 +78,7 @@
 
             var productsFilter = $('.filter-products').find('.form-control');
 
-            productsFilter.on('change, keyup', function (event) {
+            productsFilter.on('change keyup', function (event) {
                 if(event.keyCode != 13){
                     setTimeout(function () {
                         filter($('.filter-products'));
