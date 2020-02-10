@@ -33,5 +33,5 @@
         </div>
     @endforeach
 
-    {{$products->render()}}
+    {{$products->appends(request()->input())->withPath('products')->render()}}
 @endif
