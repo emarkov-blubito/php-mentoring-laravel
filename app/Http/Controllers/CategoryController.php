@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    private $categoryRepository;
 
-    public function __construct()
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -98,5 +101,13 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->action('CategoryController@index')
         ->with(['message' => 'Successfully deleted']);
+    }
+
+    public function getProductsByUrl($url)
+    {
+     $products = $this->categoryRepository->getProductsByUrl($url);
+     $categories = $this->categoryRepository->all();
+
+     return view('welcome', ['products' => $products , 'categories' => $categories]);
     }
 }
