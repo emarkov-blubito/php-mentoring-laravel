@@ -12,15 +12,15 @@ class PagesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function homepage()
     {
+        $products = Product::paginate(10);
+        $categories = Category::limit(5)->get();
 
-        $products = Product::limit(10)->get();
-
-        return view('welcome', ['products' => $products]);
+        return view('welcome', ['products' => $products , 'categories' => $categories]);
     }
 
     public function loadProducts($offset)

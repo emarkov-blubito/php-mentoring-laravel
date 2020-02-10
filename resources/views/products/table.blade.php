@@ -15,20 +15,26 @@
                 @endforeach
             </div>
             <div class="col-md-2">
-                @foreach($brands as $brand)
-                    {{($brand->id == $product->brand_id) ? $brand->name : ""}}
-                @endforeach
+                @if(isset($brands))
+                    @foreach($brands as $brand)
+                        {{($brand->id == $product->brand_id) ? $brand->name : ""}}
+                    @endforeach
+                @endif
             </div>
             <div class="col-md-2">{{$product->name}}</div>
             <div class="col-md-2">{{$product->url}}</div>
             <div class="col-md-2">{{$product->description}}</div>
             <div class="col-md-2">
-                <a href="{{ action('ProductController@edit', ['product' => $product]) }}">Edit</a>
-                <form method="POST" action="{{ action('ProductController@destroy', ['product' => $product]) }}">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit">Delete</button>
-                </form>
+                @auth
+                    <a href="{{ action('ProductController@edit', ['product' => $product]) }}">Edit</a>
+                    <form method="POST" action="{{ action('ProductController@destroy', ['product' => $product]) }}">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit">Delete</button>
+                    </form>
+                @else
+                    <a href="{{ action('ProductController@show', ['product' => $product]) }}">Show</a>
+                @endauth
             </div>
         </div>
     @endforeach
