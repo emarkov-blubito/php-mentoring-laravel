@@ -11,7 +11,7 @@ class ProductRepository implements ProductRepositoryInterface
 {
     public function all()
     {
-        return Product::all();
+        return Product::paginate(15);
     }
 
     public function getByBrand(Brand $brand)
@@ -32,15 +32,24 @@ class ProductRepository implements ProductRepositoryInterface
     public function search(Request $request)
     {
         $product = new Product();
+        $flag = false;
         if ($request->category_id) {
             $product = $product->where('category_id', $request->category_id);
+            $flag = true;
         }
         if ($request->brand_id) {
             $product = $product->where('brand_id', $request->brand_id);
+            $flag = true;
         }
         if ($request->name) {
             $product = $product->where('name', 'like', '%' . $request->name . '%');
+            $flag = true;
         }
-        return $product->get();
+
+        if($flag == false){
+            return $this->all();
+        }
+
+        return $product->paginate(15);
     }
 }
