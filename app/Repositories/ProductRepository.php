@@ -11,7 +11,7 @@ class ProductRepository implements ProductRepositoryInterface
 {
     public function all()
     {
-        return Product::paginate(15);
+        return Product::paginate(5);
     }
 
     public function getByBrand(Brand $brand)
@@ -50,6 +50,6 @@ class ProductRepository implements ProductRepositoryInterface
             return $this->all();
         }
 
-        return $product->paginate(15);
+        return $product->paginate(5);
     }
 }

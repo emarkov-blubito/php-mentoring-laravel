@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/', 'PagesController@homepage');
 Route::get('/load-products/{offset}', 'PagesController@loadProducts');
-Route::post('/products/filter', 'ProductController@filter');
+Route::get('/products/filter', 'ProductController@filter');
 
 Route::resource('categories', 'CategoryController');
 Route::resource('brands', 'BrandController');

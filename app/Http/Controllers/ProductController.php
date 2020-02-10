@@ -24,9 +24,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->productRepository->all();
+        $products = $this->productRepository->search($request);
         $categories = Category::all();
         $brands = Brand::all();
         return view('products/index', [

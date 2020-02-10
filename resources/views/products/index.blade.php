@@ -12,8 +12,8 @@
                     @if(Session::has('message'))
                         <div class="alert-success">{{ Session::get('message') }}</div>
                     @endif
-                    <form method="POST" action="/products/filter" class="filter-products">
-                        @csrf
+                    <form method="GET" action="/products/filter" class="filter-products">
+                        
                         <div class="form-group row">
                             <div class="col-4">
                                 <select name="brand_id" class="form-control">
@@ -57,7 +57,7 @@
     <script>
         $(document).ready(function(){
             
-            filter($('.filter-products'));
+            //filter($('.filter-products'));
 
             $(document).ajaxStart(function() {
                 $(".loader").show();
@@ -65,16 +65,16 @@
                 $(".loader").hide();
             });
 
-            $(document).on('click', '.pagination .page-link',function(event)
-            {
-                event.preventDefault();
+            // $(document).on('click', '.pagination .page-link',function(event)
+            // {
+            //     event.preventDefault();
     
-                $('.page-item').removeClass('active');
-                $(this).parent('.page-item').addClass('active');
-                var url = $(this).attr('href');
-                var page=$(this).attr('href').split('page=')[1];
-                filter($('.filter-products'), page);
-            });
+            //     $('.page-item').removeClass('active');
+            //     $(this).parent('.page-item').addClass('active');
+            //     var url = $(this).attr('href');
+            //     var page=$(this).attr('href').split('page=')[1];
+            //     filter($('.filter-products'), page);
+            // });
 
             var productsFilter = $('.filter-products').find('.form-control');
 
@@ -96,10 +96,18 @@
             else 
                 var pageUrl = '';
 
-            $.ajax({
-                type: "POST",
-                data: filterElement.serialize(),
-                url: filterElement.attr('action') + pageUrl ,
+            // $.ajax({
+            //     type: "POST",
+            //     data: filterElement.serialize(),
+            //     url: filterElement.attr('action') + pageUrl ,
+            //     success: function(response){
+            //         $('.product-table').html(response.products);
+            //     }
+            // });
+
+            $.get({
+                //data: filterElement.serialize(),
+                url: filterElement.attr('action') + pageUrl + '?' + filterElement.serialize(),
                 success: function(response){
                     $('.product-table').html(response.products);
                 }
