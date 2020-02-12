@@ -19,7 +19,7 @@
                                 <select name="brand_id" class="form-control">
                                     <option value="">Select Brand</option>
                                     @foreach($brands as $brand)
-                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                        <option <?php echo (isset($_GET["brand_id"]) && $_GET["brand_id"] == $brand->id)?'selected':''?> value="{{$brand->id}}">{{$brand->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -27,7 +27,7 @@
                                 <select name="category_id" class="form-control">
                                     <option value="">Select Category</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option <?php echo (isset($_GET["category_id"]) && $_GET["category_id"] == $category->id)?'selected':''?> value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
