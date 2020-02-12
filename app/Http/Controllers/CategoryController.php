@@ -107,7 +107,8 @@ class CategoryController extends Controller
     {
      $products = $this->categoryRepository->getProductsByUrl($url);
      $categories = $this->categoryRepository->all();
+     $controller = 'Category';
 
-     return view('welcome', ['products' => $products , 'categories' => $categories]);
+     return view('welcome', ['products' => $products , 'categories' => $categories, 'controller' => $controller]);
     }
 }

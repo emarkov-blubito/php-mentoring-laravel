@@ -29,10 +29,12 @@ class ProductController extends Controller
         $products = $this->productRepository->search($request);
         $categories = Category::all();
         $brands = Brand::all();
+        $controller = 'Product';
         return view('products/index', [
             'products' => $products,
             'categories' => $categories,
-            'brands' => $brands
+            'brands' => $brands,
+            'controller' => $controller
         ]);
     }
 
@@ -112,10 +114,12 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $products = $this->productRepository->search($request);
+            $controller = 'Product';
             $html = view('products/table', [
                 'products' => $products,
                 'categories' => Category::all(),
-                'brands' => Brand::all()
+                'brands' => Brand::all(),
+                'controller' => $controller
             ])->render();
             return response()->json(['products' => $html], 200);
         }
