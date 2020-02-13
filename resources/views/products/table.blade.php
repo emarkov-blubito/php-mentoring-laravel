@@ -34,6 +34,8 @@
             {{$products->appends(request()->input())->withPath('products')->render()}}
         @elseif($controller == 'Category')
             {{$products->appends(request()->input())->render()}}
+        @elseif($controller == 'Brand')
+            {{$products->appends(request()->input())->render()}}
         @endif
     @endif
 @endif

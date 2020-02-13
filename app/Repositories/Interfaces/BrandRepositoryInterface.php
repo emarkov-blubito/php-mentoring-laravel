@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Interfaces;
 
-interface CategoryRepositoryInterface
+interface BrandRepositoryInterface
 {
     public function all();
     public function getProductsByUrl($url);
