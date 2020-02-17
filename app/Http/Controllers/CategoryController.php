@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use App\Repositories\CategoryRepository;
+use App\Repositories\BrandRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     private $categoryRepository;
+    private $brandRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, BrandRepository $brandRepository)
     {
         //$this->middleware('auth');
         $this->categoryRepository = $categoryRepository;
+        $this->brandRepository = $brandRepository;
     }
 
     /**
@@ -107,7 +110,9 @@ class CategoryController extends Controller
     {
      $products = $this->categoryRepository->getProductsByUrl($url);
      $categories = $this->categoryRepository->all();
+     $brands = $this->brandRepository->all();
+     $controller = 'Category';
 
-     return view('welcome', ['products' => $products , 'categories' => $categories]);
+     return view('welcome', ['products' => $products , 'categories' => $categories, 'brands' => $brands, 'controller' => $controller]);
     }
 }

@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Repositories\BrandRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    private $brandRepository;
+    private $categoryRepository;
+
+    public function __construct(BrandRepository $brandRepository, CategoryRepository $categoryRepository){
+        $this->brandRepository = $brandRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -89,5 +99,14 @@ class BrandController extends Controller
         $brand->delete();
         return redirect()->action('BrandController@index')
         ->with(['message' => 'Successfully deleted']);
+    }
+
+    public function getProductsByUrl($url){
+        $products = $this->brandRepository->getProductsByUrl($url);
+        $brands = $this->brandRepository->all();
+        $categories = $this->categoryRepository->all();
+        $controller = 'Brand';
+
+        return view('welcome', ['products'=>$products, 'brands'=>$brands, 'categories' => $categories, 'controller'=>$controller]);
     }
 }

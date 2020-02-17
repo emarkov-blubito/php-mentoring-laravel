@@ -9,18 +9,8 @@
     </div>
     @foreach($products as $product)
         <div class="row">
-            <div class="col-md-2">
-                @foreach($categories as $category)
-                    {{($category->id == $product->category_id) ? $category->name : ""}}
-                @endforeach
-            </div>
-            <div class="col-md-2">
-                @if(isset($brands))
-                    @foreach($brands as $brand)
-                        {{($brand->id == $product->brand_id) ? $brand->name : ""}}
-                    @endforeach
-                @endif
-            </div>
+            <div class="col-md-2">{{$product->category->name}}</div>
+            <div class="col-md-2">{{$product->brand->name}}</div>
             <div class="col-md-2">{{$product->name}}</div>
             <div class="col-md-2">{{$product->url}}</div>
             <div class="col-md-2">{{$product->description}}</div>
@@ -39,5 +29,13 @@
         </div>
     @endforeach
 
-    {{$products->appends(request()->input())->withPath('products')->render()}}
+    @if(isset($controller))
+        @if($controller == 'Product')
+            {{$products->appends(request()->input())->withPath('products')->render()}}
+        @elseif($controller == 'Category')
+            {{$products->appends(request()->input())->render()}}
+        @elseif($controller == 'Brand')
+            {{$products->appends(request()->input())->render()}}
+        @endif
+    @endif
 @endif

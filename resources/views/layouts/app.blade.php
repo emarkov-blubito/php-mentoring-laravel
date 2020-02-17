@@ -74,6 +74,18 @@
                             </div>
                         </li>
                         @endif
+                        @if(isset($brands))
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Brands <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @foreach($brands as $brand)
+                                <a class="dropdown-item" href="{{action('BrandController@getProductsByUrl', ['url' => $brand->url])}}">{{$brand->name}}</a>
+                                @endforeach
+                            </div>
+                        </li>
+                        @endif
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

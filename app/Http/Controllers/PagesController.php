@@ -18,9 +18,10 @@ class PagesController extends Controller
     public function homepage()
     {
         $products = Product::paginate(10);
-        $categories = Category::limit(5)->get();
+        $categories = Category::get();
+        $brands = Brand::get();
 
-        return view('welcome', ['products' => $products , 'categories' => $categories]);
+        return view('welcome', ['products' => $products , 'categories' => $categories, 'brands' => $brands]);
     }
 
     public function loadProducts($offset)
