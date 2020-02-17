@@ -21,6 +21,6 @@ class BrandRepository implements BrandRepositoryInterface
     }
 
     public function getProductsByUrl($url){
-        return Product::where('brand_id', $this->getBrandIdByUrl($url))->with('brand')->paginate(5);
+        return Product::where('brand_id', $this->getBrandIdByUrl($url))->paginate(5);
     }
 }

@@ -13,13 +13,13 @@
                         <div class="alert-success">{{ Session::get('message') }}</div>
                     @endif
                     <form method="GET" action="/products/filter" class="filter-products">
-                        
+
                         <div class="form-group row">
                             <div class="col-4">
                                 <select name="brand_id" class="form-control">
                                     <option value="">Select Brand</option>
                                     @foreach($brands as $brand)
-                                        <option <?php echo (isset($_GET["brand_id"]) && $_GET["brand_id"] == $brand->id)?'selected':''?> value="{{$brand->id}}">{{$brand->name}}</option>
+                                        <option {{ (isset($_GET["brand_id"]) && $_GET["brand_id"] == $brand->id) ? 'selected' : '' }} value="{{$brand->id}}">{{$brand->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -27,7 +27,7 @@
                                 <select name="category_id" class="form-control">
                                     <option value="">Select Category</option>
                                     @foreach($categories as $category)
-                                        <option <?php echo (isset($_GET["category_id"]) && $_GET["category_id"] == $category->id)?'selected':''?> value="{{$category->id}}">{{$category->name}}</option>
+                                        <option {{ (isset($_GET["category_id"]) && $_GET["category_id"] == $category->id) ? 'selected' : '' }} value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -56,7 +56,7 @@
 @section('js')
     <script>
         $(document).ready(function(){
-            
+
             //filter($('.filter-products'));
 
             $(document).ajaxStart(function() {
@@ -68,7 +68,7 @@
             // $(document).on('click', '.pagination .page-link',function(event)
             // {
             //     event.preventDefault();
-    
+
             //     $('.page-item').removeClass('active');
             //     $(this).parent('.page-item').addClass('active');
             //     var url = $(this).attr('href');
@@ -93,7 +93,7 @@
         var filter = function (filterElement, pageNumber) {
             if(pageNumber)
                 var pageUrl = '?page=' + pageNumber
-            else 
+            else
                 var pageUrl = '';
 
             // $.ajax({
