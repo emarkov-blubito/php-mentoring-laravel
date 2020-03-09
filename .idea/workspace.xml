@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29a6ab4f-d8d9-439f-8d4a-0558247d1903" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php-mentoring-laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php-mentoring-laravel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PagesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PagesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/BrandRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/BrandRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +174,9 @@
       <workItem from="1576574684961" duration="2058000" />
       <workItem from="1576582180923" duration="16000" />
       <workItem from="1581331826488" duration="5909000" />
-      <workItem from="1581925156246" duration="3251000" />
+      <workItem from="1581925156246" duration="6478000" />
+      <workItem from="1582532671353" duration="1887000" />
+      <workItem from="1583755730113" duration="439000" />
     </task>
     <task id="LOCAL-00001" summary="Request store/update">
       <created>1580117185387</created>
@@ -209,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580128740942</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="reformatted dropdowns for categories and brands in products">
+      <created>1581930498760</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581930498760</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,7 +224,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -231,7 +237,8 @@
     <MESSAGE value="create repository pattern" />
     <MESSAGE value="filter by category id" />
     <MESSAGE value="apply multiple filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="apply multiple filter" />
+    <MESSAGE value="reformatted dropdowns for categories and brands in products" />
+    <option name="LAST_COMMIT_MESSAGE" value="reformatted dropdowns for categories and brands in products" />
   </component>
   <component name="WindowStateProjectService">
     <state x="499" y="168" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1581334633556">
