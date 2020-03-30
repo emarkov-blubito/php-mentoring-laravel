@@ -31,11 +31,15 @@
                                 <div class="col-md-3">{{$category->url}}</div>
                                 <div class="col-md-3">{{$category->description}}</div>
                                 <div class="col-md-3">
-                                    <a href="{{ action('CategoryController@edit', ['category' => $category]) }}">Edit</a>
+                                    <a href="{{ action('CategoryController@edit', ['category' => $category]) }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                     <form method="POST" action="{{ action('CategoryController@destroy', ['category' => $category]) }}">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit">Delete</button>
+                                        <a href="javascript:;" onclick="$(this).parent().submit();">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </div>
                             </div>
