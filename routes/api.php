@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Account;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::put('/api_basic/entity-accounts', function (Request $request) {
+    Account::seedData($request->json);
 });
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
