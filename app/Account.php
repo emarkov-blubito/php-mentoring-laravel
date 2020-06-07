@@ -34,7 +34,7 @@ class Account extends Model
         $data = json_decode($json);
         if ($data) {
             foreach ($data as $el) {
-                Account::create($el);
+                Account::create( (array) $el);
             }
         }
     }
