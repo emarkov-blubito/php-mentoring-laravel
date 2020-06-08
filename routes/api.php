@@ -15,9 +15,9 @@ use App\Account;
 */
 
 Route::put('/api_basic/entity-accounts', function (Request $request) {
-    Account::seedData($request->json);
+    Account::seedData($request->all());
     return response()->json(['ok' => 1], 200);
-});
+})->middleware('basicauth');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

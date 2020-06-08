@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class Account extends Model
 {
@@ -31,10 +32,10 @@ class Account extends Model
 
     public static function seedData($json)
     {
-        $data = json_decode($json);
-        if ($data) {
-            foreach ($data as $el) {
-                Account::create( (array) $el);
+        if ($json) {
+            foreach ($json as $el) {
+                //Log::info($el);
+                Account::create($el);
             }
         }
     }
