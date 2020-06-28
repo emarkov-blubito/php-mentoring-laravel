@@ -41,11 +41,19 @@ return [
             'provider' => 'users',
         ],
 
+        // OAuth2 with Laravel Passport security configuration
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
-            'hash' => false,
         ],
+
+
+        // Bearer Token API security configuration
+        // 'api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'users',
+        //     'hash' => false,
+        // ],
     ],
 
     /*

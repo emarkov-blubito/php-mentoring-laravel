@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Account;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,13 @@ Route::put('/api_basic/entity-accounts', function (Request $request) {
     return response()->json(['ok' => 1], 200);
 })->middleware('basicauth');
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:api')->get('/test-bearer-token', function (Request $request) {
+    return $request->user();
+});
+
+Route::middleware('auth:api')->get('/test-oauth2', function (Request $request) {
+    dd('x');
+    $user_id = $request->get("uid", 0);
+    $user = User::find($user_id);
+    return $user;
+});
