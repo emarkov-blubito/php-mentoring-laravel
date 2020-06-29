@@ -25,8 +25,5 @@ Route::middleware('auth:api')->get('/test-bearer-token', function (Request $requ
 });
 
 Route::middleware('auth:api')->get('/test-oauth2', function (Request $request) {
-    dd('x');
-    $user_id = $request->get("uid", 0);
-    $user = User::find($user_id);
-    return $user;
+    return $request->user();
 });
